@@ -77,6 +77,11 @@ git_super_status() {
 	  echo "$STATUS"
 	fi
 }
+function prompt_git_info() {
+	if [ -n "$__CURRENT_GIT_STATUS" ]; then
+		echo "(%{${fg[red]}%}$__CURRENT_GIT_STATUS[1]%{${fg[default]}%}$__CURRENT_GIT_STATUS[2]%{${fg[magenta]}%}$__CURRENT_GIT_STATUS[3]%{${fg[default]}%})"
+	fi
+}
 
 # Default values for the appearance of the prompt. Configure at will.
 ZSH_THEME_GIT_PROMPT_PREFIX="("
@@ -90,3 +95,4 @@ ZSH_THEME_GIT_PROMPT_REMOTE=""
 ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✔"
 PROMPT='%B%m%~%b$(git_super_status) %# '
+RPROMPT='$(prompt_git_info)'
